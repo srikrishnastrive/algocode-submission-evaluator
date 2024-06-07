@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { ATLAS_DB_URL, NODE_ENV } = require('./server.config');
+const { ATLAS_DB_URL, NODE_ENV } = require('./serverConfig');
 
 
 
@@ -7,6 +7,7 @@ async function connectToDB(){
     try{
         if(NODE_ENV == 'development'){
             await mongoose.connect(ATLAS_DB_URL);
+            console.log('connected to mango db successfully');
         }
         else if (NODE_ENV == 'production'){
             await mongoose.connect("some other url")

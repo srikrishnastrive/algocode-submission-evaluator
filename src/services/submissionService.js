@@ -1,21 +1,13 @@
-// async function pingCheck() {
-//     return "pong";
-// }
-
 const submissionQueueProducer = require("../producers/submissionQueueProducer");
 
-// module.exports = { pingCheck };
 
 
 class SubmissionService{
-    constructor(){
-        //inject here
+    constructor(submissionRepository){
+        this.submissionRepository = submissionRepository;
     }
-    async pingCheck(){
-        return 'pong';
-    }
-    async addSubmission(submission){
-        const submission = this.submissionRepository.createSubmission(submission);
+    async addSubmission(submissionPayload){
+        const submission = await this.submissionRepository.createSubmission(submissionPayload);
         if(!submission){
             throw {message:"Not able to crate submission"}
         }
