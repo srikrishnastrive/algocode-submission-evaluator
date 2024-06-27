@@ -2,9 +2,11 @@ const fastify = require('fastify')({ logger: true });
 const app = require('./app');
 const serverConfig = require('./config/serverConfig');
 const connectToDB = require('../src/config/db.config');
+const errorHandler = require('./utils/errorHandler');
 
 // Register the app plugin
 fastify.register(app);
+fastify.setErrorHandler(errorHandler);
 
 // Run the server
 fastify.listen({ port:serverConfig.PORT }, async (err) => {
